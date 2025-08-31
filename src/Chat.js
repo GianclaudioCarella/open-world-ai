@@ -22,7 +22,7 @@ const Chat = () => {
   
   try {
     // Call the Azure Function POST API
-    const response = await fetch("http://localhost:4280/api/chat", {
+    const response = await fetch("https://yellow-tree-0a4f71e10.1.azurestaticapps.net:4280/api/chat", {
       method: "POST",
       headers: {
         "Content-Type": "application/json"
