@@ -1,5 +1,4 @@
 import React from "react";
-import { Link } from "react-router-dom";
 import "./css/home.css";
 import "./css/base.css";
 import "./css/style.css";
