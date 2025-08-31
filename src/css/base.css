@@ -1,0 +1,40 @@
+/* ------------------------------------------ CSS home  ------------------------------------------ */
+
+
+.banner-internas {
+	width:100%;
+	background:#000;
+	height:150px;
+	margin:auto;
+	display:block;
+	background:url(../img/topo-interno.jpg) center bottom no-repeat;
+	border-bottom:#dfc846 solid 5px;
+	text-indent:-9999999px;
+	
+}
+article { 
+	padding-top:10px;
+}
+section form { width:100%;  margin-bottom:30px;}
+section form input { margin-bottom:10px;}
+section form .btn:hover { background:#cab437;}
+h2, h3, h4, .open-world p { padding:10px;}
+h4 { padding-bottom:0px;}
+h4 { padding:0px 15px; font-weight:400; }
+h4, h4 strong {color:#dfc846;}
+.box-cinza { background:#f9f9f9; border-top:#EEE solid 1px; border-bottom:#EEE solid 1px; width:100%; margin:auto; padding-bottom:35px;}
+.fotoPerfil { width:440px; margin-top:10px;}
+.panel-heading a { 
+display:block;
+color:#dfc846; 
+}
+.panel-group { margin:0px 10px;}
+.col-md-6 h4 { margin:0px 10px; padding:0px;}
+ 
+/* ------------------------------------------ CSS Mobile  ------------------------------------------ */
+@media only screen 
+and (max-width : 920px) {
+	
+	.imgLeft, .imgRight { display:none;}
+}
+

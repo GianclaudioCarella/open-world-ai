@@ -1,0 +1,91 @@
+/* ------------------------------------------ CSS home  ------------------------------------------ */
+/* header { position:absolute; left:50%; margin-left: -480px; z-index:9999999;  } */
+.banner {
+  background-image: url('../img/porto-de-santos-nova.jpg');
+  background-size: cover;
+  background-position: center;
+  height: 240px;
+  width: 100%;
+  margin-bottom: 24px;
+}
+
+section { margin-top:-100px;}
+#photo p {
+	text-indent:-999999px; background:url(../img/sprite.png) bottom left no-repeat; width:220px; height:200px; padding-top:90px; margin-left:20px;;	
+}
+.detalhes { width:998px; position:absolute; top:0px; left:50%; margin-left:-480px;}
+.img-left { position:absolute; left:-160px; top:0px; overflow:hidden;}
+.img-right { position:absolute; right:-122px; top:425px; overflow:hidden;}
+.left { position:absolute; left:20%; margin-left:-200px;}
+#box {
+	border-top:#CCC dotted 1px;
+	margin-top:45px;
+}
+#txtDestaque {
+	width:100px;
+	height:415px;
+	position:absolute;
+	margin:0 50%;	
+}
+.col-md-4 span {
+	padding:5px 0px;
+	display:block;
+	font-size:14px;
+	padding-bottom:40px;
+}
+.col-md-4 h4 { 	color:#dfc846;}
+.mobile { display:none;}
+
+/* ------------------------------------------ CSS Mobile  ------------------------------------------ */
+@media only screen 
+and (max-width : 600px) {
+	.banner, .detalhes, form { display:none;}
+	section, footer { width:100%;}
+	header, h1, menu { position:relative; width:100%; margin-left: 0px;  }
+	h1 { position:relative; top:0px; width:150px; background:url(../img/sprite.png) left top no-repeat; text-indent:-9999999px; float:left}
+	header { display:none;}
+	.mobile { display:block; width:100%; background:#294171; height:55px;}
+	h2 { font-size:20px;}
+	.mobile img { display:block; float:left;}
+	section { margin-top:0px;}
+	#box { width:100%; margin:0px;}
+	/*Initialize*/
+ul#menu, ul#menu ul.sub-menu {
+    padding:0;
+    margin: 0;
+}
+ul#menu li { 	background:#294171;}
+ul#menu li, ul#menu ul.sub-menu li {
+    list-style-type: none;
+    display: inline-block;
+}
+/*Link Appearance*/
+ ul#menu li ul.sub-menu li a {
+    text-decoration: none;
+    color: #fff;
+	padding:8px;
+    display:inline-block;
+}
+/*Make the parent of sub-menu relative*/
+ul#menu li {
+    position: relative;
+}
+ul#menu { float:right;}
+/*sub menu*/
+ul#menu li ul.sub-menu {
+    display:none;
+    position: absolute;
+    top: 55px;
+    left: -50;
+    width: 100px;
+}
+ul#menu li:hover ul.sub-menu {
+    display:block;
+	right:0px;
+	background:#294171;
+
+}
+	
+}
+
+
