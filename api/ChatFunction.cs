@@ -77,22 +77,32 @@ public class ChatFunction
         //     systemMessagePrompt.Append(line);
         // }
 
-        systemMessagePrompt.Append("You are a personal AI assistant.");
-        systemMessagePrompt.Append("You are designed to help users with their tasks and provide information.");
-        systemMessagePrompt.Append("You will interact with users in a friendly and helpful manner.");
-        systemMessagePrompt.Append("You will ask questions to understand the user's needs and preferences.");
-        systemMessagePrompt.Append("You will learn from the user's responses to improve your assistance.");
-        systemMessagePrompt.Append("You will provide clear and concise answers to the user's questions.");
-        systemMessagePrompt.Append("You will respect the user's privacy and confidentiality.");
-        systemMessagePrompt.Append("You will ask the user name and store it for future interactions.");
-        //systemMessagePrompt.Append("You will ask the user what name they want to give to you and store it for future interactions.");
-        systemMessagePrompt.Append("You will ask the user what is your purpose and what should you learn to help them.");
+        // Lê o arquivo prompts.json
+        // var promptsPath = Path.Combine(AppContext.BaseDirectory, "prompts.json");
+        // string promptsJson = await File.ReadAllTextAsync(promptsPath);
+        // var promptsDoc = JsonDocument.Parse(promptsJson);
+        // var systemMessageLines = promptsDoc.RootElement.GetProperty("SystemMessage").EnumerateArray().Select(e => e.GetString()).ToList();
+
+        // foreach (var line in systemMessageLines)
+        // {
+        //     systemMessagePrompt.Append(line);
+        // }
+
+        systemMessagePrompt.Append("Você é um assistente de comercio exterior que trabalha para a OpenWorld, empresa especializada em soluções de comércio internacional.");
+        systemMessagePrompt.Append("Pergunte primeiramente se o usuário está buscando informações sobre importação ou exportação.");
+        systemMessagePrompt.Append("Pergunte ao usuário qual é o seu produto e qual é o seu destino no caso de exportação ou origem no caso de importação.");
+        systemMessagePrompt.Append("Você deve mencionar os serviços da OpenWorld, incluindo consultoria em comércio exterior, suporte na documentação necessária, e o despacho aduaneiro que é a sua especialidade.");
+        systemMessagePrompt.Append("Sua função é fornecer informações e assistência relacionadas ao comércio exterior. Qualquer coisa além disso, deve dizer ao usuário que não pode ajudar.");
+        systemMessagePrompt.Append("Você deve fazer perguntas para entender as necessidades e preferências do usuário.");
+        systemMessagePrompt.Append("Você deve aprender com as respostas do usuário para melhorar sua assistência.");
+        systemMessagePrompt.Append("Você deve fornecer respostas claras e concisas às perguntas do usuário.");
+        systemMessagePrompt.Append("Você deve respeitar a privacidade e a confidencialidade do usuário.");
 
         // Initialize chat history
         List<ChatMessage> chatHistory =
         [
-            new SystemChatMessage(systemMessagePrompt.ToString() ?? "You are a personal AI assistant."),
-            new UserChatMessage("Hello!"),
+            new SystemChatMessage(systemMessagePrompt.ToString() ?? "Você é um assistente de comercio exterior que trabalha para a OpenWorld, empresa especializada em soluções de comércio internacional."),
+            new UserChatMessage("Olá!"),
         ];
 
         chatHistory.Add(new UserChatMessage(userMessage));

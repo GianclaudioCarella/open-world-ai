@@ -2,11 +2,23 @@
 import React, { useState, useRef, useEffect } from "react";
 import "./Chat.css";
 
+const ThinkingDots = () => {
+  const [dots, setDots] = useState("");
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setDots((prev) => (prev.length < 3 ? prev + "." : ""));
+    }, 500);
+    return () => clearInterval(interval);
+  }, []);
+  return <span>Pensando{dots}</span>;
+};
+
 const Chat = () => {
   const [messages, setMessages] = useState([
-    { sender: "bot", text: "Welcome! How can I help you today?" }
+    { sender: "bot", text: "Olá! Como posso ajudá-lo hoje? Sou um assistente em comércio exterior e posso ajudar com informações sobre tarifas, regulamentações e muito mais." }
   ]);
   const [input, setInput] = useState("");
+  const [botThinking, setBotThinking] = useState(false);
   const messagesEndRef = useRef(null);
 
   useEffect(() => {
@@ -17,36 +29,29 @@ const Chat = () => {
   e.preventDefault();
   if (!input.trim()) return;
 
-  // Add the user's message immediately
-  setMessages([...messages, { sender: "user", text: input }]);
-  
+  setMessages((prev) => [...prev, { sender: "user", text: input }]);
+  setInput("");
+  setBotThinking(true); // Mostra "Pensando..."
+
   try {
     // Call the Azure Function POST API
-    //const response = await fetch("http://localhost:4280/api/chat", {
-    const response = await fetch("https://yellow-tree-0a4f71e10.1.azurestaticapps.net/api/chat", {
+    const response = await fetch("http://localhost:4280/api/chat", {
+    //const response = await fetch("https://yellow-tree-0a4f71e10.1.azurestaticapps.net/api/chat", {
       method: "POST",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify({ message: input })  // matches C# model property
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ message: input })
     });
 
-    if (!response.ok) {
-      throw new Error(`Function returned status ${response.status}`);
-    }
+    if (!response.ok) throw new Error(`Function returned status ${response.status}`);
 
-    const data = await response.json();  // { sender: "bot", text: "..." }
-
-    // Add the bot's response message
-    setMessages((prevMessages) => [...prevMessages, { sender: data.sender, text: data.text }]);
-    } catch (error) {
-        // On error, show fallback message from bot
-        setMessages((prevMessages) => [...prevMessages, { sender: "bot", text: "Sorry, something went wrong." }]);
-        console.error("Error calling Azure Function:", error);
-    }
-
-    setInput("");
-    };
+    const data = await response.json();
+    setMessages((prev) => [...prev, { sender: data.sender, text: data.text }]);
+  } catch (error) {
+    setMessages((prev) => [...prev, { sender: "bot", text: "Estou com problemas de conexão. Por favor, tente novamente mais tarde." }]);
+    console.error("Error calling Azure Function:", error);
+  }
+  setBotThinking(false); // Esconde "Pensando..."
+};
 
   return (
     <div className="chat-container">
@@ -59,17 +64,22 @@ const Chat = () => {
             {msg.text}
           </div>
         ))}
+        {botThinking && (
+          <div className="chat-message bot">
+            <ThinkingDots />
+          </div>
+        )}
         <div ref={messagesEndRef} />
       </div>
       <form className="chat-input-container" onSubmit={sendMessage}>
         <input
           className="chat-input"
-          placeholder="Type your message..."
+          placeholder="Escreva sua mensagem..."
           value={input}
           onChange={(e) => setInput(e.target.value)}
         />
         <button className="chat-send-btn" type="submit">
-          Send
+          Enviar
         </button>
       </form>
     </div>
